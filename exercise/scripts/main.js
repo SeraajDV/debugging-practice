@@ -15,12 +15,13 @@ window.addEventListener('DOMContentLoaded', function() {
       // collection of selected cards and apply the correct CSS class.
       if (selectedCards.length < 2) {
         card.classList.add('is-selected');
+        selectedCards.push(card); // Pushes current card to selectedCards array
       }
 
       // If we have selected two cards, see if they match.
       if (selectedCards.length === 2) {
         var card1 = selectedCards[0];
-        var card2 = selectedCards[0];
+        var card2 = selectedCards[1]; // Changed index from 0 to 1 to access second card
 
         // If the cards match, add them to the collection of matched cards and
         // apply the correct CSS class.
@@ -33,12 +34,12 @@ window.addEventListener('DOMContentLoaded', function() {
         // Regardless of whether or not the cards match, deselect them and reset
         // the collection of matched cards.
         card1.classList.remove('is-selected');
-        card3.classList.remove('is-selected');
+        card2.classList.remove('is-selected'); // Renamed "card3" to "card2" because "card3" is undefined
         selectedCards = [];
       }
 
       // If we've matched all the cards, display a message.
-      if (matchedCards.length > cards.length) {
+      if (matchedCards.length === cards.length) { // Changed < to === to check if matched cards length matches the length of the cards array
         alert('You matched all the cards, nice job!');
       }
     });
@@ -49,8 +50,8 @@ window.addEventListener('DOMContentLoaded', function() {
   // - #green
   // - #orange
   // - #red
-  var deckElement = document.querySelector('.Cards');
-  var deckColor = window.location.hashh;
+  var deckElement = document.querySelector('.cards');
+  var deckColor = window.location.hash.replace("#", ""); // Changed window.location.hashh to window.location.hash because "hash" is a valid property and apply replace to remove "#" from string
 
   if (deckElement && deckColor) {
     var className = 'cards--' + deckColor;
